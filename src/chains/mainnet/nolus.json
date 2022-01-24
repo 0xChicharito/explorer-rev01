@@ -1,0 +1,17 @@
+{
+    "chain_name": "nolus-private",
+    "api": ["http://localhost:1317"],
+    "sdk_version": "0.44.5",
+    "coin_type": "118",
+    "min_tx_fee": "8000",
+    "excludes": ["mint", "governance"],
+    "assets": [{
+        "base": "unolus",
+        "symbol": "NOLUS",
+        "exponent": "6",
+        "coingecko_id": "nolus-private",
+        "logo": "/nolus.png"
+    }],
+    "addr_prefix": "nolus",
+    "logo": "/nolus.png"
+}
