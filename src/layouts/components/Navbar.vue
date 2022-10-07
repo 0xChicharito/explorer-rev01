@@ -81,12 +81,9 @@
       </b-media>
     </div>
 
-    <!-- <dark-Toggler class="d-none d-lg-block" /> -->
     <!-- Right Col -->
     <b-navbar-nav class="nav align-items-center ml-auto">
-      <dark-Toggler class="d-none d-lg-block" />
       <search-bar />
-      <locale />
       <b-dropdown
         class="ml-1"
         variant="link"
@@ -190,8 +187,6 @@ import {
   BDropdown, BDropdownItem, BDropdownDivider,
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
-import DarkToggler from '@core/layouts/components/app-navbar/components/DarkToggler.vue'
-import Locale from '@core/layouts/components/app-navbar/components/Locale.vue'
 import SearchBar from '@core/layouts/components/app-navbar/components/SearchBar.vue'
 // import CartDropdown from '@core/layouts/components/app-navbar/components/CartDropdown.vue'
 import { getLocalAccounts, timeIn, toDay } from '@/libs/utils'
@@ -211,8 +206,6 @@ export default {
     BDropdownDivider,
 
     // Navbar Components
-    DarkToggler,
-    Locale,
     SearchBar,
     // CartDropdown,
     // UserDropdown,
