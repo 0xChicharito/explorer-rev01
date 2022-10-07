@@ -211,7 +211,7 @@ export default {
   text-align: center;
   a {
     text-decoration: underline;
-    color: var(--purple)
+    color: var(--primary)
   }
 
 }
