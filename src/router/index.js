@@ -119,48 +119,48 @@ const router = new VueRouter({
         ],
       },
     },
-    {
-      path: '/:chain/parameters',
-      name: 'parameters',
-      component: () => import('@/views/Parameters.vue'),
-      meta: {
-        pageTitle: 'Parameters',
-        breadcrumb: [
-          {
-            text: 'Parameters',
-            active: true,
-          },
-        ],
-      },
-    },
-    {
-      path: '/:chain/statesync',
-      name: 'statesync',
-      component: () => import('@/views/StateSync.vue'),
-      meta: {
-        pageTitle: 'State Sync',
-        breadcrumb: [
-          {
-            text: 'State Synchronization',
-            active: true,
-          },
-        ],
-      },
-    },
-    {
-      path: '/:chain/uptime',
-      name: 'uptime',
-      component: () => import('@/views/Uptime.vue'),
-      meta: {
-        pageTitle: 'Uptime',
-        breadcrumb: [
-          {
-            text: 'Uptime',
-            active: true,
-          },
-        ],
-      },
-    },
+    // {
+    //   path: '/:chain/parameters',
+    //   name: 'parameters',
+    //   component: () => import('@/views/Parameters.vue'),
+    //   meta: {
+    //     pageTitle: 'Parameters',
+    //     breadcrumb: [
+    //       {
+    //         text: 'Parameters',
+    //         active: true,
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   path: '/:chain/statesync',
+    //   name: 'statesync',
+    //   component: () => import('@/views/StateSync.vue'),
+    //   meta: {
+    //     pageTitle: 'State Sync',
+    //     breadcrumb: [
+    //       {
+    //         text: 'State Synchronization',
+    //         active: true,
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   path: '/:chain/uptime',
+    //   name: 'uptime',
+    //   component: () => import('@/views/Uptime.vue'),
+    //   meta: {
+    //     pageTitle: 'Uptime',
+    //     breadcrumb: [
+    //       {
+    //         text: 'Uptime',
+    //         active: true,
+    //       },
+    //     ],
+    //   },
+    // },
     {
       path: '/:chain/uptime/my',
       name: 'myuptime',
@@ -329,56 +329,41 @@ const router = new VueRouter({
         ],
       },
     },
-    // custom modules for specified chains
-    // 1. cosmos
-    {
-      path: '/:chain/cosmos/trade',
-      name: 'gravity',
-      component: () => import('@/views/GravityPool.vue'),
-      meta: {
-        pageTitle: 'Gravity Pools',
-        breadcrumb: [
-          {
-            text: 'Gravity',
-            active: true,
-          },
-        ],
-      },
-    },
+    // TODO we can adapt to our needs
     // 2. OSMOSIS
-    {
-      path: '/:chain/osmosis/trade/:poolid?',
-      name: 'osmosis-trade',
-      component: () => import('@/views/OsmosisTrade.vue'),
-      meta: {
-        pageTitle: 'Classic Trade',
-        breadcrumb: [
-          {
-            text: 'DEX',
-            active: true,
-          },
-          {
-            text: 'Classic Trade',
-            active: true,
-          },
-        ],
-      },
-    },
+    // {
+    //   path: '/:chain/osmosis/trade/:poolid?',
+    //   name: 'osmosis-trade',
+    //   component: () => import('@/views/OsmosisTrade.vue'),
+    //   meta: {
+    //     pageTitle: 'Classic Trade',
+    //     breadcrumb: [
+    //       {
+    //         text: 'DEX',
+    //         active: true,
+    //       },
+    //       {
+    //         text: 'Classic Trade',
+    //         active: true,
+    //       },
+    //     ],
+    //   },
+    // },
     // common modules
-    {
-      path: '/:chain/consensus',
-      name: 'consensus',
-      component: () => import('@/views/ConsensusStates.vue'),
-      meta: {
-        pageTitle: 'Consensus State',
-        breadcrumb: [
-          {
-            text: 'Consensus State',
-            active: true,
-          },
-        ],
-      },
-    },
+    // {
+    //   path: '/:chain/consensus',
+    //   name: 'consensus',
+    //   component: () => import('@/views/ConsensusStates.vue'),
+    //   meta: {
+    //     pageTitle: 'Consensus State',
+    //     breadcrumb: [
+    //       {
+    //         text: 'Consensus State',
+    //         active: true,
+    //       },
+    //     ],
+    //   },
+    // },
     {
       path: '/error/error-404',
       name: 'error-404',
