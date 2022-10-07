@@ -1,5 +1,5 @@
 {
-  "chain_name": "nolus",
+  "chain_name": "nolus-rila",
   "coingecko": "",
   "api": [
     "https://net-rila.nolus.io:1317"
@@ -15,7 +15,7 @@
   "logo": "/logos/nolus-small.svg",
   "assets": [
     {
-      "base": "unolus",
+      "base": "unls",
       "symbol": "NOLUS",
       "exponent": "6",
       "coingecko_id": "",

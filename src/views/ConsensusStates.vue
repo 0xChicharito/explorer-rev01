@@ -189,7 +189,7 @@ export default {
     this.rpc = `${this.chains[this.selected].rpc[0]}/consensus_state`
     this.fetchPosition()
     this.update()
-    this.timer = setInterval(this.update, 6000)
+    this.timer = setInterval(this.update, 1000)
   },
   beforeDestroy() {
     clearInterval(this.timer)

@@ -179,7 +179,7 @@ export default {
         blocks.push({ sigs, height })
         this.blocks = blocks
 
-        this.timer = setInterval(this.fetch_latest, 6000)
+        this.timer = setInterval(this.fetch_latest, 1000)
       })
     },
     initColor() {

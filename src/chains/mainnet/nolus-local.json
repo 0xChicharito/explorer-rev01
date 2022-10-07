@@ -1,11 +1,11 @@
 {
-  "chain_name": "nolus",
+  "chain_name": "nolus-local",
   "coingecko": "",
   "api": [
-    "https://net-rila.nolus.io:1317"
+    "http://127.0.0.1:26614"
   ],
   "rpc": [
-    "https://net-rila.nolus.io:26657"
+    "http://127.0.0.1:26612"
   ],
   "snapshot_provider": "",
   "sdk_version": "0.45.4",
@@ -15,7 +15,7 @@
   "logo": "/logos/nolus-small.svg",
   "assets": [
     {
-      "base": "unolus",
+      "base": "unls",
       "symbol": "NOLUS",
       "exponent": "6",
       "coingecko_id": "",
