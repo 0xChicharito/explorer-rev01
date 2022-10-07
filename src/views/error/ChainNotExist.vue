@@ -4,14 +4,14 @@
     <b-link class="brand-logo">
       <vuexy-logo />
       <h2 class="brand-text text-primary ml-1">
-        PING.PUB
+        nolus
       </h2>
     </b-link>
 
     <div class="misc-inner p-2 p-sm-3">
       <div class="w-100 text-center">
         <h2 class="mb-1">
-          Sorry, The chain is not found
+          Sorry, the chain is not found
         </h2>
         <p class="mb-2">
           Feel free to contact us if you want to add your chain.
