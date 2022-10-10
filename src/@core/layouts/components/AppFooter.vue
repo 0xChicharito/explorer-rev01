@@ -1,5 +1,6 @@
 <template>
   <p class="clearfix mb-0">
+    <span>© Nolus Platform Ltd. 2022</span>
   </p>
 </template>
 

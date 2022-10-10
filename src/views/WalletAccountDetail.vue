@@ -39,31 +39,6 @@
       >
         <b-card-header class="pt-0 pl-0 pr-0">
           <b-card-title>Assets</b-card-title>
-          <div>
-            <b-button
-              v-b-modal.operation-modal
-              variant="primary"
-              size="sm"
-              class="mr-25"
-              @click="setOperationModalType('Transfer')"
-            >
-              <feather-icon
-                icon="SendIcon"
-                class="d-md-none"
-              /><small class="d-none d-md-block">Transfer</small>
-            </b-button>
-            <b-button
-              v-b-modal.operation-modal
-              variant="danger"
-              size="sm"
-              @click="setOperationModalType('IBCTransfer')"
-            ><feather-icon
-               icon="SendIcon"
-               class="d-md-none"
-             />
-              <span class="d-none d-md-block">IBC Transfer</span>
-            </b-button>
-          </div>
         </b-card-header>
         <b-card-body class="pl-0 pr-0">
           <b-row>

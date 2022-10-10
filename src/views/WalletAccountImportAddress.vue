@@ -1,17 +1,5 @@
 <template>
   <div>
-    <b-alert
-      variant="danger"
-      :show="true"
-      dismissible
-    >
-      <h4 class="alert-heading">
-        DISCLAIMER:
-      </h4>
-      <div class="alert-body">
-        <span>Ping.pub is maintained by the community, Everyone could add a chain to ping.pub. Some of those blockchains are not fully tested, Use at your own risk.</span>
-      </div>
-    </b-alert>
     <form-wizard
       ref="wizard"
       color="#082D63"
@@ -195,62 +183,6 @@
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
-            </b-col>
-            <b-col md="12">
-              <b-form-group
-                label="Import Address For Chains:"
-              >
-                <validation-provider
-                  #default="{ errors }"
-                  name="addrs"
-                  rules="required"
-                >
-                  <div class="demo-inline-spacing text-uppercase">
-                    <b-row>
-                      <b-col
-                        v-for="item, key in chains"
-                        :key="key"
-                        xs="12"
-                        md="4"
-                        lg="3"
-                        class="mb-25"
-                      >
-                        <b-form-checkbox
-                          v-model="selected"
-                          name="addrs"
-                          :value="key"
-                        >
-                          <b-avatar
-                            :src="item.logo"
-                            size="18"
-                            variant="light-primary"
-                            rounded=""
-                          />
-                          <span
-                            v-b-tooltip.hover.v-primary
-                            :title="`Coin Type: ${item.coin_type}`"
-                            :class="hdpath.startsWith(`m/44'/${item.coin_type}`)?'text-success':'text-danger'"
-                          > {{ item.chain_name }}</span>
-                        </b-form-checkbox>
-                      </b-col>
-                    </b-row>
-                  </div>
-                  <small class="text-success">{{ errors[0] }}</small>
-                </validation-provider>
-              </b-form-group>
-              <b-alert
-                show
-                variant="info"
-              >
-                <div class="alert-heading">
-                  IMPORTANT
-                </div>
-                <div class="alert-body">
-                  <div>
-                    If you don't have Ledger, Do not import those addresses in <b class="text-danger">RED</b>. Because these addresses are derived from different coin_type which is not as same as the official one
-                  </div>
-                </div>
-              </b-alert>
             </b-col>
           </b-row>
         </validation-observer>
