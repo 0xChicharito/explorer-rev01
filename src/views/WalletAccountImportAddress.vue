@@ -1,112 +1,42 @@
 <template>
   <div>
-    <form-wizard
-      ref="wizard"
-      color="#082D63"
-      :title="null"
-      :subtitle="null"
-      shape="square"
-      finish-button-text="Save"
-      back-button-text="Previous"
-      class="steps-transparent mb-3 md"
-      @on-complete="formSubmitted"
-    >
+    <form-wizard ref="wizard" color="#082D63" :title="null" :subtitle="null" shape="square" finish-button-text="Save"
+      back-button-text="Previous" class="steps-transparent mb-3 md" @on-complete="formSubmitted">
       <!-- Device tab -->
-      <tab-content
-        title="Device"
-        :before-change="validationFormDevice"
-      >
-        <validation-observer
-          ref="deviceRules"
-          tag="form"
-        >
+      <tab-content title="Device" :before-change="validationFormDevice">
+        <validation-observer ref="deviceRules" tag="form">
           <b-row>
             <b-col md="12">
-              <b-form-group
-                label="Select a device to import accounts"
-                label-for="device"
-              >
-                <validation-provider
-                  #default="{ errors }"
-                  name="device"
-                  rules="required"
-                >
-                  <b-form-radio-group
-                    v-model="device"
-                    stacked
-                  >
+              <b-form-group label="Select a device to import accounts" label-for="device">
+                <validation-provider #default="{ errors }" name="device" rules="required">
+                  <b-form-radio-group v-model="device" stacked>
 
-                    <b-form-radio
-                      v-model="device"
-                      name="device"
-                      value="keplr"
-                      checked
-                      class="mb-1 mt-1"
-                    >
+                    <b-form-radio v-model="device" name="device" value="keplr" checked class="mb-1 mt-1">
                       Keplr
                     </b-form-radio>
-                    <b-form-radio
-                      v-model="device"
-                      name="device"
-                      value="ledger"
-                      class="mb-1"
-                    >
+                    <b-form-radio v-model="device" name="device" value="ledger" class="mb-1">
                       Ledger via WebUSB
                     </b-form-radio>
-                    <b-form-radio
-                      v-model="device"
-                      name="device"
-                      value="ledger2"
-                      class="mb-1"
-                    >
+                    <b-form-radio v-model="device" name="device" value="ledger2" class="mb-1">
                       Ledger via Bluetooth
                     </b-form-radio>
-                    <b-form-radio
-                      v-model="device"
-                      name="device"
-                      value="metamask"
-                      class="mb-1 d-none"
-                    >
+                    <b-form-radio v-model="device" name="device" value="metamask" class="mb-1 d-none">
                       Metamask
                     </b-form-radio>
-                    <b-form-radio
-                      v-model="device"
-                      name="device"
-                      value="address"
-                    >
+                    <b-form-radio v-model="device" name="device" value="address">
                       Address (Observe Only)
                     </b-form-radio>
                   </b-form-radio-group>
-                  <b-form-input
-                    v-if="device === 'address'"
-                    v-model="address"
-                    class="mt-1"
-                    name="address"
-                    placeholder="cosmos1ev0vtddkl7jlwfawlk06yzncapw2x9quyxx75u"
-                  />
+                  <b-form-input v-if="device === 'address'" v-model="address" class="mt-1" name="address"
+                    placeholder="cosmos1ev0vtddkl7jlwfawlk06yzncapw2x9quyxx75u" />
                   <small class="text-danger">{{ debug }}{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
             </b-col>
-            <b-col
-              v-if="device.startsWith('ledger')"
-              md="12"
-            >
-              <b-form-group
-                label="HD Path"
-                label-for="hdpath"
-              >
-                <validation-provider
-                  #default="{ errors }"
-                  name="HD Path"
-                  rules="required"
-                >
-                  <b-form-input
-                    v-model="hdpath"
-                    class="mt-1"
-                    name="hdpath"
-                    placeholder="m/44'/118/0'/0/0"
-                  />
+            <b-col v-if="device.startsWith('ledger')" md="12">
+              <b-form-group label="HD Path" label-for="hdpath">
+                <validation-provider #default="{ errors }" name="HD Path" rules="required">
+                  <b-form-input v-model="hdpath" class="mt-1" name="hdpath" placeholder="m/44'/118/0'/0/0" />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
@@ -116,70 +46,28 @@
       </tab-content>
 
       <!-- address  -->
-      <tab-content
-        title="Accounts"
-        :before-change="validationFormAddress"
-      >
-        <validation-observer
-          ref="accountRules"
-          tag="form"
-        >
+      <tab-content title="Accounts" :before-change="validationFormAddress">
+        <validation-observer ref="accountRules" tag="form">
           <b-row>
             <b-col md="12">
-              <b-form-group
-                label="Account Name"
-                label-for="account_name"
-              >
-                <validation-provider
-                  #default="{ errors }"
-                  name="Account Name"
-                  rules="required"
-                >
-                  <b-form-input
-                    id="account_name"
-                    v-model="name"
-                    :state="errors.length > 0 ? false:null"
-                    placeholder="Ping Nano X"
-                    :readonly="edit"
-                  />
+              <b-form-group label="Account Name" label-for="account_name">
+                <validation-provider #default="{ errors }" name="Account Name" rules="required">
+                  <b-form-input id="account_name" v-model="name" :state="errors.length > 0 ? false:null"
+                    placeholder="Ping Nano X" :readonly="edit" />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
             </b-col>
-            <b-col
-              v-if="hdpath"
-              md="12"
-            >
-              <b-form-group
-                label="HD Path"
-                label-for="ir"
-              >
-                <b-form-input
-                  id="ir"
-                  :value="hdpath"
-                  readonly
-                />
+            <b-col v-if="hdpath" md="12">
+              <b-form-group label="HD Path" label-for="ir">
+                <b-form-input id="ir" :value="hdpath" readonly />
               </b-form-group>
             </b-col>
-            <b-col
-              v-if="accounts"
-              md="12"
-            >
-              <b-form-group
-                label="Public Key"
-                label-for="ir"
-              >
-                <validation-provider
-                  #default="{ errors }"
-                  name="Public Key"
-                  rules="required"
-                >
-                  <b-form-input
-                    id="ir"
-                    :value="formatPubkey(accounts.pubkey)"
-                    readonly
-                    :state="errors.length > 0 ? false:null"
-                  />
+            <b-col v-if="accounts" md="12">
+              <b-form-group label="Public Key" label-for="ir">
+                <validation-provider #default="{ errors }" name="Public Key" rules="required">
+                  <b-form-input id="ir" :value="formatPubkey(accounts.pubkey)" readonly
+                    :state="errors.length > 0 ? false:null" />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
@@ -188,34 +76,19 @@
         </validation-observer>
       </tab-content>
 
-      <tab-content
-        title="Confirmation"
-      >
+      <tab-content title="Confirmation">
         <div class="d-flex border-bottom mb-2">
-          <feather-icon
-            icon="UserIcon"
-            size="19"
-            class="mb-50"
-          />
+          <feather-icon icon="UserIcon" size="19" class="mb-50" />
           <h4 class="mb-0 ml-50">
             {{ name }} <small> {{ hdpath }}</small>
           </h4>
         </div>
 
         <b-row class="mb-2">
-          <b-col
-            v-for="i in addresses"
-            :key="i.addr"
-            cols="12"
-          >
+          <b-col v-for="i in addresses" :key="i.addr" cols="12">
             <b-input-group class="mb-25">
               <b-input-group-prepend is-text>
-                <b-avatar
-                  :src="i.logo"
-                  size="18"
-                  variant="light-primary"
-                  rounded
-                />
+                <b-avatar :src="i.logo" size="18" variant="light-primary" rounded />
               </b-input-group-prepend>
               <b-form-input :value="i.addr" />
             </b-input-group>
@@ -223,35 +96,6 @@
         </b-row>
       </tab-content>
     </form-wizard>
-
-    <b-alert
-      variant="secondary"
-      :show="!accounts && device === 'keplr'"
-    >
-      <h4 class="alert-heading">
-        Enable Keplr For {{ chainId }}
-      </h4>
-      <div class="alert-body p-1">
-        <span>If Keplr has not added <code>{{ chainId }}</code>, We can enable it here.</span>
-        <b-form-textarea
-          :value="keplr"
-          rows="10"
-          class="mt-1 mb-1"
-        />
-        <div
-          v-if="error"
-          class="text-danger"
-        >
-          {{ error }}
-        </div>
-        <b-button
-          variant="primary"
-          @click="suggest()"
-        >
-          Enable Keplr
-        </b-button>
-      </div>
-    </b-alert>
   </div>
 </template>
 
@@ -263,7 +107,6 @@ import ToastificationContent from '@core/components/toastification/Toastificatio
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import MetaMaskSigner from '@/libs/client/MetaMaskSigner'
 import {
-  BAlert,
   BRow,
   BCol,
   BFormGroup,
@@ -276,7 +119,6 @@ import {
   BFormRadioGroup,
   VBTooltip,
   BFormTextarea,
-  BButton,
 } from 'bootstrap-vue'
 import { required } from '@validations'
 import {
@@ -287,8 +129,6 @@ import { stringToPath } from '@cosmjs/crypto'
 
 export default {
   components: {
-    BAlert,
-    BButton,
     ValidationProvider,
     ValidationObserver,
     FormWizard,
@@ -388,13 +228,6 @@ export default {
     }
   },
   methods: {
-    suggest() {
-      if (window.keplr) {
-        window.keplr.experimentalSuggestChain(JSON.parse(this.keplr)).catch(e => {
-          this.error = e
-        })
-      }
-    },
     initParamsForKeplr(chainid, chain) {
       return JSON.stringify({
         chainId: chainid,
@@ -461,7 +294,6 @@ export default {
         this.debug = 'Please install keplr extension'
         return null
       }
-      // const chainId = 'cosmoshub'
       const chainId = await this.$http.getLatestBlock().then(ret => ret.block.header.chain_id)
       await window.keplr.enable(chainId)
       const offlineSigner = window.getOfflineSigner(chainId)
@@ -520,9 +352,15 @@ export default {
       if (!ok) { // new import, otherwise it's edit mode.
         switch (this.device) {
           case 'keplr':
+            if (window.keplr) {
+              await window.keplr.experimentalSuggestChain(JSON.parse(this.keplr))
+                .catch(e => {
+                  this.error = e
+                })
+            }
             await this.cennectKeplr().then(accounts => {
               if (accounts) {
-              // eslint-disable-next-line prefer-destructuring
+                // eslint-disable-next-line prefer-destructuring
                 this.accounts = accounts[0]
                 ok = true
               }
@@ -531,7 +369,7 @@ export default {
           case 'metamask':
             await this.connectMetamask().then(accounts => {
               if (accounts) {
-              // eslint-disable-next-line prefer-destructuring
+                // eslint-disable-next-line prefer-destructuring
                 this.accounts = accounts[0]
                 ok = true
               }
@@ -543,7 +381,7 @@ export default {
           case 'ledger2':
             await this.connect().then(accounts => {
               if (accounts) {
-              // eslint-disable-next-line prefer-destructuring
+                // eslint-disable-next-line prefer-destructuring
                 this.accounts = accounts[0]
                 ok = true
               }
@@ -581,6 +419,6 @@ export default {
 </script>
 
 <style lang="scss">
-  // @import '@core/assets/fonts/feather/iconfont.css';
-  @import '@core/scss/vue/libs/vue-wizard.scss';
+// @import '@core/assets/fonts/feather/iconfont.css';
+@import '@core/scss/vue/libs/vue-wizard.scss';
 </style>
