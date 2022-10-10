@@ -13,47 +13,44 @@ function processMenu() {
     blockchains.push(menu)
   })
 
-  if (blockchains.length > 1) {
-    chainMenus.push({ header: 'ecosystem' })
-    chainMenus.push({
-      title: 'blockchains',
-      children: blockchains,
-      tag: `${blockchains.length}`,
-      icon: 'https://ping.pub/logo.svg',
-    })
-  }
   chainMenus.push({ header: 'LINKS' })
+  chainMenus.push({
+    title: 'Website',
+    href: 'https://nolus.io',
+    icon: 'CastIcon',
+  })
   if (isTestnet()) {
     chainMenus.push({
-      title: 'Mainnet Explorer',
-      href: 'https://ping.pub',
-      icon: 'ChromeIcon',
+      title: 'Testnet Explorer',
+      href: 'https://testnet.nolus.io',
+      icon: 'CompassIcon',
     })
   } else {
     chainMenus.push({
-      title: 'Testnet Explorer',
-      href: 'http://testnet.ping.pub',
-      icon: 'LifeBuoyIcon',
+      title: 'Mainnet Explorer',
+      href: 'http://mainnet.nolus.io',
+      icon: 'CompassIcon',
     })
   }
-  chainMenus.push({
-    title: 'Github',
-    href: 'https://github.com/ping-pub/explorer',
-    icon: 'GithubIcon',
-  })
+  // TODO uncomment once we are open source
+  // chainMenus.push({
+  //   title: 'Github',
+  //   href: '',
+  //   icon: 'GithubIcon',
+  // })
   chainMenus.push({
     title: 'Discord',
-    href: 'https://discord.gg/CmjYVSr6GW',
+    href: 'https://discord.com/invite/nolus-protocol',
     icon: 'EyeIcon',
   })
   chainMenus.push({
     title: 'Twitter',
-    href: 'https://twitter.com/ping_pub',
+    href: 'https://twitter.com/NolusProtocol',
     icon: 'TwitterIcon',
   })
   chainMenus.push({
     title: 'Telegram',
-    href: 'https://t.me/pingpub',
+    href: 'https://t.me/NolusProtocol',
     icon: 'SendIcon',
   })
 

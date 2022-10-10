@@ -138,16 +138,6 @@
     </b-overlay>
     <template #modal-footer>
       <div class="d-flex justify-content-between w-100">
-        <div id="left-footer">
-          <b-form-checkbox
-            v-if="isOwner"
-            v-model="advance"
-            name="advance"
-            value="true"
-          >
-            <small>Advanced</small>
-          </b-form-checkbox>
-        </div>
         <b-button
           v-if="isOwner"
           variant="primary"
