@@ -34,7 +34,7 @@ deploy-aws-dev:
     - docker
   script:
     - aws --version
-    - aws s3 sync dist s3://${BUCKET_NAME_TEST}
+    - aws s3 sync dist s3://explorer-rila.nolus.io
   environment:
     name: development
     url: http://${BUCKET_NAME_TEST}.s3-website-eu-west-1.amazonaws.com
