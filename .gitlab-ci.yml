@@ -25,6 +25,7 @@ build:
     paths:
       - dist/
 
+
 deploy-aws-test:
   stage: deploy
   image:
