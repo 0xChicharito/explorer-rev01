@@ -5,7 +5,7 @@ stages:
 
 
 variables:
-  BUCKET_NAME_TEST: explorer-rila.nolus.io
+  BUCKET_NAME_TEST: test-explorer
   BUCKET_NAME_PROD: explorer.nolus.io
 
 
@@ -35,7 +35,7 @@ deploy-aws-test:
     - docker
   script:
     - aws --version
-    - aws s3 sync dist s3://explorer-rila.nolus.io
+    - aws s3 sync dist s3://${BUCKET_NAME_TEST}
   environment:
     name: development
     url: http://${BUCKET_NAME_TEST}.s3-website-eu-west-1.amazonaws.com
