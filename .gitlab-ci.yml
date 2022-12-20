@@ -5,7 +5,7 @@ stages:
 
 
 variables:
-  BUCKET_NAME_TEST: test-explorer
+  BUCKET_NAME_TEST: explorer-rila.nolus.io
   BUCKET_NAME_PROD: explorer.nolus.io
 
 
