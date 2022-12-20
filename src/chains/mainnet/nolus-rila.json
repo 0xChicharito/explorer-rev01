@@ -16,8 +16,8 @@
   "assets": [
     {
       "base": "unls",
-      "symbol": "NOLUS",
-      "exponent": 6,
+      "symbol": "NLS",
+      "exponent": "6",
       "coingecko_id": "",
       "logo": "/logos/nolus-small.svg"
     }

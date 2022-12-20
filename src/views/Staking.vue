@@ -220,6 +220,7 @@
           <b-button
             variant="primary"
             size="sm"
+            class="hidden"
           >
             Export to Excel
           </b-button>
