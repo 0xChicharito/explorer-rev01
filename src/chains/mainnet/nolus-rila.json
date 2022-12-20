@@ -9,7 +9,7 @@
   ],
   "snapshot_provider": "",
   "sdk_version": "0.45.4",
-  "coin_type": "118",
+  "coin_type": 118,
   "min_tx_fee": "8000",
   "addr_prefix": "nolus",
   "logo": "/logos/nolus-small.svg",
@@ -17,7 +17,7 @@
     {
       "base": "unls",
       "symbol": "NOLUS",
-      "exponent": "6",
+      "exponent": 6,
       "coingecko_id": "",
       "logo": "/logos/nolus-small.svg"
     }

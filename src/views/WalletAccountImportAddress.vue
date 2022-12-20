@@ -196,7 +196,6 @@ export default {
   },
   mounted() {
     const { selected } = this.$store.state.chains
-    // this.chain = selected
     this.$http.getLatestBlock().then(res => {
       this.chainId = res.block.header.chain_id
       this.keplr = this.initParamsForKeplr(this.chainId, selected)
@@ -260,6 +259,11 @@ export default {
             coinMinimalDenom: chain.assets[0].base,
             coinDecimals: chain.assets[0].exponent,
             coinGeckoId: chain.assets[0].coingecko_id || 'unknown',
+            gasPriceStep: {
+              low: 0.02,
+              average: 0.025,
+              high: 0.03,
+            },
           },
         ],
         stakeCurrency: {
@@ -267,11 +271,6 @@ export default {
           coinMinimalDenom: chain.assets[0].base,
           coinDecimals: chain.assets[0].exponent,
           coinGeckoId: chain.assets[0].coingecko_id || 'unknown',
-        },
-        gasPriceStep: {
-          low: 0.01,
-          average: 0.025,
-          high: 0.03,
         },
         features: chain.keplr_features || [],
       }, null, '\t')
