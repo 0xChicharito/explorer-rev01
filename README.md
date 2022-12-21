@@ -1,8 +1,8 @@
 <div align="center">
 
-![Ping Wallet](./public/logo.svg)
-
 <h1>Ping Dashboard</h1>
+
+<br /><p align="center"><img alt="Ping Dashboard logo" src="docs/explorer-logo.svg" width="100"/></p><br />
 
 **Ping Dashboard is not only an explorer but also a wallet and more ... 🛠**
 
