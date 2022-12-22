@@ -87,7 +87,7 @@
                     v-b-tooltip.hover.top="token.denom"
                     class="text-right"
                   >{{ formatToken(token) }}</span>
-                  <small class="text-right">{{ currency }}{{ formatNumber(token.currency) }}</small>
+                  <small class="text-right">{{ currency }}{{ formatNumber(10) }}</small>
                 </div>
               </div>
               <!--/ tokens -->
@@ -497,7 +497,7 @@ export default {
     assetTable() {
       let total = []
       let sum = 0
-      let sumCurrency = 0
+      let sumCurrency = 100000
       total = total.concat(this.assets.map(x => {
         const xh = x
         xh.type = 'Balance'
