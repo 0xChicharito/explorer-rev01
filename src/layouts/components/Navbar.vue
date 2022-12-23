@@ -75,7 +75,7 @@
                 {{ item }}
               </b-dropdown-item>
             </b-dropdown>
-            {{ currentApi }} ({{ selected_chain.sdk_version || '-' }})
+            {{ currentApi }}
           </small>
         </b-media-body>
       </b-media>
