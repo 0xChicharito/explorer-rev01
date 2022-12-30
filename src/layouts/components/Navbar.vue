@@ -13,7 +13,7 @@
             variant="transparent"
             rounded
             size="21"
-            :src="selected_chain.logo"
+            :src="selected_chain.hamburger"
             class="badge-minimal"
           />
           <feather-icon

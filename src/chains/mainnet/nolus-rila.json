@@ -13,6 +13,7 @@
   "min_tx_fee": "8000",
   "addr_prefix": "nolus",
   "logo": "/logos/nolus-small.svg",
+  "hamburger": "/logos/Hamburger_icon.svg.png",
   "assets": [
     {
       "base": "unls",
