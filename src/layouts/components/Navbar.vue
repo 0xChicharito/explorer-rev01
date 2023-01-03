@@ -145,7 +145,10 @@
           <span class="align-middle ml-50">All Accounts</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="{ name: 'delegations' }" class="hidden">
+        <b-dropdown-item
+          :to="{ name: 'delegations' }"
+          class="hidden"
+        >
           <feather-icon
             icon="BookOpenIcon"
             size="16"
@@ -153,7 +156,10 @@
           <span class="align-middle ml-50">My Delegations</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="`/${selected_chain.chain_name}/uptime/my`" class="hidden">
+        <b-dropdown-item
+          :to="`/${selected_chain.chain_name}/uptime/my`"
+          class="hidden"
+        >
           <feather-icon
             icon="AirplayIcon"
             size="16"
@@ -161,7 +167,10 @@
           <span class="align-middle ml-50">My Validators</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="`/wallet/votes`" class="hidden">
+        <b-dropdown-item
+          :to="`/wallet/votes`"
+          class="hidden"
+        >
           <feather-icon
             icon="PocketIcon"
             size="16"
@@ -169,7 +178,10 @@
           <span class="align-middle ml-50">My Votes</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="`/wallet/transactions`" class="hidden">
+        <b-dropdown-item
+          :to="`/wallet/transactions`"
+          class="hidden"
+        >
           <feather-icon
             icon="LayersIcon"
             size="16"

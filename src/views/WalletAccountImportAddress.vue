@@ -1,42 +1,112 @@
 <template>
   <div>
-    <form-wizard ref="wizard" color="#082D63" :title="null" :subtitle="null" shape="square" finish-button-text="Save"
-      back-button-text="Previous" class="steps-transparent mb-3 md" @on-complete="formSubmitted">
+    <form-wizard
+      ref="wizard"
+      color="#082D63"
+      :title="null"
+      :subtitle="null"
+      shape="square"
+      finish-button-text="Save"
+      back-button-text="Previous"
+      class="steps-transparent mb-3 md"
+      @on-complete="formSubmitted"
+    >
       <!-- Device tab -->
-      <tab-content title="Device" :before-change="validationFormDevice">
-        <validation-observer ref="deviceRules" tag="form">
+      <tab-content
+        title="Device"
+        :before-change="validationFormDevice"
+      >
+        <validation-observer
+          ref="deviceRules"
+          tag="form"
+        >
           <b-row>
             <b-col md="12">
-              <b-form-group label="Select a device to import accounts" label-for="device">
-                <validation-provider #default="{ errors }" name="device" rules="required">
-                  <b-form-radio-group v-model="device" stacked>
+              <b-form-group
+                label="Select a device to import accounts"
+                label-for="device"
+              >
+                <validation-provider
+                  #default="{ errors }"
+                  name="device"
+                  rules="required"
+                >
+                  <b-form-radio-group
+                    v-model="device"
+                    stacked
+                  >
 
-                    <b-form-radio v-model="device" name="device" value="keplr" checked class="mb-1 mt-1">
+                    <b-form-radio
+                      v-model="device"
+                      name="device"
+                      value="keplr"
+                      checked
+                      class="mb-1 mt-1"
+                    >
                       Keplr
                     </b-form-radio>
-                    <b-form-radio v-model="device" name="device" value="ledger" class="mb-1">
+                    <b-form-radio
+                      v-model="device"
+                      name="device"
+                      value="ledger"
+                      class="mb-1"
+                    >
                       Ledger via WebUSB
                     </b-form-radio>
-                    <b-form-radio v-model="device" name="device" value="ledger2" class="mb-1">
+                    <b-form-radio
+                      v-model="device"
+                      name="device"
+                      value="ledger2"
+                      class="mb-1"
+                    >
                       Ledger via Bluetooth
                     </b-form-radio>
-                    <b-form-radio v-model="device" name="device" value="metamask" class="mb-1 d-none">
+                    <b-form-radio
+                      v-model="device"
+                      name="device"
+                      value="metamask"
+                      class="mb-1 d-none"
+                    >
                       Metamask
                     </b-form-radio>
-                    <b-form-radio v-model="device" name="device" value="address">
+                    <b-form-radio
+                      v-model="device"
+                      name="device"
+                      value="address"
+                    >
                       Address (Observe Only)
                     </b-form-radio>
                   </b-form-radio-group>
-                  <b-form-input v-if="device === 'address'" v-model="address" class="mt-1" name="address"
-                    placeholder="cosmos1ev0vtddkl7jlwfawlk06yzncapw2x9quyxx75u" />
+                  <b-form-input
+                    v-if="device === 'address'"
+                    v-model="address"
+                    class="mt-1"
+                    name="address"
+                    placeholder="cosmos1ev0vtddkl7jlwfawlk06yzncapw2x9quyxx75u"
+                  />
                   <small class="text-danger">{{ debug }}{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
             </b-col>
-            <b-col v-if="device.startsWith('ledger')" md="12">
-              <b-form-group label="HD Path" label-for="hdpath">
-                <validation-provider #default="{ errors }" name="HD Path" rules="required">
-                  <b-form-input v-model="hdpath" class="mt-1" name="hdpath" placeholder="m/44'/118/0'/0/0" />
+            <b-col
+              v-if="device.startsWith('ledger')"
+              md="12"
+            >
+              <b-form-group
+                label="HD Path"
+                label-for="hdpath"
+              >
+                <validation-provider
+                  #default="{ errors }"
+                  name="HD Path"
+                  rules="required"
+                >
+                  <b-form-input
+                    v-model="hdpath"
+                    class="mt-1"
+                    name="hdpath"
+                    placeholder="m/44'/118/0'/0/0"
+                  />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
@@ -46,28 +116,70 @@
       </tab-content>
 
       <!-- address  -->
-      <tab-content title="Accounts" :before-change="validationFormAddress">
-        <validation-observer ref="accountRules" tag="form">
+      <tab-content
+        title="Accounts"
+        :before-change="validationFormAddress"
+      >
+        <validation-observer
+          ref="accountRules"
+          tag="form"
+        >
           <b-row>
             <b-col md="12">
-              <b-form-group label="Account Name" label-for="account_name">
-                <validation-provider #default="{ errors }" name="Account Name" rules="required">
-                  <b-form-input id="account_name" v-model="name" :state="errors.length > 0 ? false:null"
-                    placeholder="Ping Nano X" :readonly="edit" />
+              <b-form-group
+                label="Account Name"
+                label-for="account_name"
+              >
+                <validation-provider
+                  #default="{ errors }"
+                  name="Account Name"
+                  rules="required"
+                >
+                  <b-form-input
+                    id="account_name"
+                    v-model="name"
+                    :state="errors.length > 0 ? false:null"
+                    placeholder="Ping Nano X"
+                    :readonly="edit"
+                  />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
             </b-col>
-            <b-col v-if="hdpath" md="12">
-              <b-form-group label="HD Path" label-for="ir">
-                <b-form-input id="ir" :value="hdpath" readonly />
+            <b-col
+              v-if="hdpath"
+              md="12"
+            >
+              <b-form-group
+                label="HD Path"
+                label-for="ir"
+              >
+                <b-form-input
+                  id="ir"
+                  :value="hdpath"
+                  readonly
+                />
               </b-form-group>
             </b-col>
-            <b-col v-if="accounts" md="12">
-              <b-form-group label="Public Key" label-for="ir">
-                <validation-provider #default="{ errors }" name="Public Key" rules="required">
-                  <b-form-input id="ir" :value="formatPubkey(accounts.pubkey)" readonly
-                    :state="errors.length > 0 ? false:null" />
+            <b-col
+              v-if="accounts"
+              md="12"
+            >
+              <b-form-group
+                label="Public Key"
+                label-for="ir"
+              >
+                <validation-provider
+                  #default="{ errors }"
+                  name="Public Key"
+                  rules="required"
+                >
+                  <b-form-input
+                    id="ir"
+                    :value="formatPubkey(accounts.pubkey)"
+                    readonly
+                    :state="errors.length > 0 ? false:null"
+                  />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
@@ -78,17 +190,30 @@
 
       <tab-content title="Confirmation">
         <div class="d-flex border-bottom mb-2">
-          <feather-icon icon="UserIcon" size="19" class="mb-50" />
+          <feather-icon
+            icon="UserIcon"
+            size="19"
+            class="mb-50"
+          />
           <h4 class="mb-0 ml-50">
             {{ name }} <small> {{ hdpath }}</small>
           </h4>
         </div>
 
         <b-row class="mb-2">
-          <b-col v-for="i in addresses" :key="i.addr" cols="12">
+          <b-col
+            v-for="i in addresses"
+            :key="i.addr"
+            cols="12"
+          >
             <b-input-group class="mb-25">
               <b-input-group-prepend is-text>
-                <b-avatar :src="i.logo" size="18" variant="light-primary" rounded />
+                <b-avatar
+                  :src="i.logo"
+                  size="18"
+                  variant="light-primary"
+                  rounded
+                />
               </b-input-group-prepend>
               <b-form-input :value="i.addr" />
             </b-input-group>

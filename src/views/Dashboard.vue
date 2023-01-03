@@ -312,7 +312,10 @@
         </b-col>
       </b-row>
     </b-card>
-    <router-link to="/wallet/import" class="hidden">
+    <router-link
+      to="/wallet/import"
+      class="hidden"
+    >
       <b-card class="addzone text-center">
         <feather-icon icon="PlusIcon" />
         Connect Wallet
