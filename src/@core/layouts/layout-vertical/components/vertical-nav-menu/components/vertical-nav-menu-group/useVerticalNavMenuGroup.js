@@ -78,7 +78,7 @@ export default function useVerticalNavMenuGroup(item) {
     if (val) {
       if (!isVerticalMenuCollapsed.value) isOpen.value = val
     } else {
-      isOpen.value = val
+      isOpen.value = !val
     }
   })
 

@@ -13,7 +13,7 @@
             variant="transparent"
             rounded
             size="21"
-            :src="selected_chain.logo"
+            :src="selected_chain.hamburger"
             class="badge-minimal"
           />
           <feather-icon
@@ -75,7 +75,7 @@
                 {{ item }}
               </b-dropdown-item>
             </b-dropdown>
-            {{ currentApi }} ({{ selected_chain.sdk_version || '-' }})
+            {{ currentApi }}
           </small>
         </b-media-body>
       </b-media>
@@ -142,10 +142,10 @@
             icon="KeyIcon"
             size="16"
           />
-          <span class="align-middle ml-50">Accounts</span>
+          <span class="align-middle ml-50">All Accounts</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="{ name: 'delegations' }">
+        <b-dropdown-item :to="{ name: 'delegations' }" class="hidden">
           <feather-icon
             icon="BookOpenIcon"
             size="16"
@@ -153,7 +153,7 @@
           <span class="align-middle ml-50">My Delegations</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="`/${selected_chain.chain_name}/uptime/my`">
+        <b-dropdown-item :to="`/${selected_chain.chain_name}/uptime/my`" class="hidden">
           <feather-icon
             icon="AirplayIcon"
             size="16"
@@ -161,7 +161,7 @@
           <span class="align-middle ml-50">My Validators</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="`/wallet/votes`">
+        <b-dropdown-item :to="`/wallet/votes`" class="hidden">
           <feather-icon
             icon="PocketIcon"
             size="16"
@@ -169,7 +169,7 @@
           <span class="align-middle ml-50">My Votes</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="`/wallet/transactions`">
+        <b-dropdown-item :to="`/wallet/transactions`" class="hidden">
           <feather-icon
             icon="LayersIcon"
             size="16"

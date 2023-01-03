@@ -285,7 +285,7 @@
       </b-row>
       <b-row
         v-if="address"
-        class="mt-1"
+        class="mt-1 hidden"
       >
         <b-col cols="6">
           <b-button
@@ -312,7 +312,7 @@
         </b-col>
       </b-row>
     </b-card>
-    <router-link to="/wallet/import">
+    <router-link to="/wallet/import" class="hidden">
       <b-card class="addzone text-center">
         <feather-icon icon="PlusIcon" />
         Connect Wallet

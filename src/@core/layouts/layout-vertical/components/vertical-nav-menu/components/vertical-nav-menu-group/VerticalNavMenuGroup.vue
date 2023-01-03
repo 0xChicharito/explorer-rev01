@@ -1,17 +1,14 @@
 <template>
   <li
     v-if="canViewVerticalNavMenuGroup(item)"
-    class="nav-item has-sub"
+    class="has-sub"
     :class="{
       'open': isOpen,
       'disabled': item.disabled,
       'sidebar-group-active': isActive,
     }"
   >
-    <b-link
-      class="d-flex align-items-center"
-      @click="() => updateGroupOpen(!isOpen)"
-    >
+    <b-link class="d-flex cursor-regular">
       <b-avatar
         variant="transparent"
         :src="item.icon"
