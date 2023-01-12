@@ -80,32 +80,6 @@
       :key="index"
     >
       <div>
-        <div class="d-flex justify-content-between align-items-end mb-1">
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="warning"
-            :to="`/wallet/import?name=${item.name}`"
-          >
-            <feather-icon
-              icon="EditIcon"
-              class="mr-50"
-            />
-            <span class="align-middle">{{ item.name }}</span>
-          </b-button>
-          <div class="mr-50">
-            <router-link
-              :to="`/wallet/import?name=${item.name}`"
-              class="mr-50"
-            >
-              <feather-icon
-                icon="EditIcon"
-                class="mr-10"
-              />
-              <span class="align-middle">Edit</span>
-            </router-link>
-          </div>
-        </div>
-
         <b-row>
           <b-col
             v-for="acc, j in item.address"
@@ -121,16 +95,29 @@
             >
               <b-card-header>
                 <div>
-                  <b-card-title> <span class="text-uppercase">{{ acc.chain }}</span></b-card-title>
+                  <b-card-title><span class="align-middle">{{ item.name }}</span> <span class="text-uppercase">({{ acc.chain }})</span></b-card-title>
                 </div>
-                <feather-icon
-                  v-b-tooltip.hover.v-danger
-                  :title="`Remove ${acc.chain.toUpperCase()}`"
-                  icon="XSquareIcon"
-                  size="18"
-                  class="cursor-pointer text-danger"
-                  @click="removeAddress(acc.addr)"
-                />
+                <div>
+                  <router-link
+                    :to="`/wallet/import?name=${item.name}`"
+                    class="mr-1"
+                  >
+                    <feather-icon
+                      v-b-tooltip.hover.v-info
+                      :title="`Edit ${acc.chain.toUpperCase()}`"
+                      icon="EditIcon"
+                      size="18"
+                    />
+                  </router-link>
+                  <feather-icon
+                    v-b-tooltip.hover.v-danger
+                    :title="`Remove ${acc.chain.toUpperCase()}`"
+                    icon="XSquareIcon"
+                    size="18"
+                    class="cursor-pointer text-danger"
+                    @click="removeAddress(acc.addr)"
+                  />
+                </div>
               </b-card-header>
               <b-card-body class="text-truncate">
                 <b-row>
@@ -148,69 +135,63 @@
                         <small :class="formatBalanceChangesColor(acc.addr)"> {{ formatBalanceChanges(acc.addr) }}</small>
                       </div>
                     </div>
-                    <app-collapse>
-                      <app-collapse-item title="Assets">
-                        <template #header>
-                          <div>
-                            <feather-icon
-                              icon="CopyIcon"
-                              @click="copy(acc.addr)"
-                            />&nbsp;
-                            <small class="text-muted">{{ formatAddr(acc.addr) }}</small>
-                          </div>
-                        </template>
-                        <div
-                          v-for="b,i in balances[acc.addr]"
-                          :key="i"
-                          class="d-flex justify-content-between"
-                        >
-                          <div
-                            class="ml-25 font-weight-bolder text-uppercase text-success d-flex flex-column text-left"
-                            title="Balance"
-                          >
-                            {{ formatAmount(b.amount, b.denom) }} {{ formatDenom(b.denom) }}
-                            <span class="font-small-2 text-muted text-nowrap">{{ currency }}{{ formatCurrency(b.amount, b.denom) }}</span>
-                          </div>
-                          <div class="d-flex flex-column text-right">
-                            <span class="font-weight-bold mb-0">{{ currency }}{{ formatPrice(b.denom) }}</span>
-                            <small
-                              :class="priceColor(b.denom)"
-                              class="py-0"
-                            >{{ formatChanges(b.denom) }}</small>
-                          </div>
-                        </div>
-                        <div
-                          v-for="b,i in delegations[acc.addr]"
-                          :key="`d-${i}`"
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div
-                            class="ml-25 font-weight-bolder text-uppercase text-primary d-flex flex-column text-left"
-                            title="Balance"
-                          >
-                            {{ formatAmount(b.amount, b.denom) }} {{ formatDenom(b.denom) }}
-                            <span class="font-small-2 text-muted text-nowrap">{{ currency }}{{ formatCurrency(b.amount, b.denom) }}</span>
-                          </div>
-                          <div class="d-flex flex-column text-right">
-                            <span class="font-weight-bold mb-0">{{ currency }}{{ formatPrice(b.denom) }}</span>
-                            <small
-                              :class="priceColor(b.denom)"
-                              class="py-0"
-                            >{{ formatChanges(b.denom) }}</small>
-                          </div>
-                        </div>
-                        <b-button
-                          block
-                          size="sm"
-                          variant="outline-primary"
-                          :to="`/${acc.chain}/account/${acc.addr}`"
-                          class="mt-1 mb-0"
-                          @click="updateDefaultWallet(item.name)"
-                        >
-                          <feather-icon icon="TrelloIcon" /> Detail
-                        </b-button>
-                      </app-collapse-item>
-                    </app-collapse>
+                    <div class="text-left mb-1">
+                      <feather-icon
+                        icon="CopyIcon"
+                        @click="copy(acc.addr)"
+                      />&nbsp;
+                      <small class="text-muted">{{ formatAddr(acc.addr) }}</small>
+                    </div>
+                    <div
+                      v-for="b,i in balances[acc.addr]"
+                      :key="i"
+                      class="d-flex justify-content-between"
+                    >
+                      <div
+                        class="ml-25 font-weight-bolder text-uppercase text-success d-flex flex-column text-left"
+                        title="Balance"
+                      >
+                        {{ formatAmount(b.amount, b.denom) }} {{ formatDenom(b.denom) }}
+                        <span class="font-small-2 text-muted text-nowrap">{{ currency }}{{ formatCurrency(b.amount, b.denom) }}</span>
+                      </div>
+                      <div class="d-flex flex-column text-right">
+                        <span class="font-weight-bold mb-0">{{ currency }}{{ formatPrice(b.denom) }}</span>
+                        <small
+                          :class="priceColor(b.denom)"
+                          class="py-0"
+                        >{{ formatChanges(b.denom) }}</small>
+                      </div>
+                    </div>
+                    <div
+                      v-for="b,i in delegations[acc.addr]"
+                      :key="`d-${i}`"
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="ml-25 font-weight-bolder text-uppercase text-primary d-flex flex-column text-left"
+                        title="Balance"
+                      >
+                        {{ formatAmount(b.amount, b.denom) }} {{ formatDenom(b.denom) }}
+                        <span class="font-small-2 text-muted text-nowrap">{{ currency }}{{ formatCurrency(b.amount, b.denom) }}</span>
+                      </div>
+                      <div class="d-flex flex-column text-right">
+                        <span class="font-weight-bold mb-0">{{ currency }}{{ formatPrice(b.denom) }}</span>
+                        <small
+                          :class="priceColor(b.denom)"
+                          class="py-0"
+                        >{{ formatChanges(b.denom) }}</small>
+                      </div>
+                    </div>
+                    <b-button
+                      block
+                      size="sm"
+                      variant="outline-primary"
+                      :to="`/${acc.chain}/account/${acc.addr}`"
+                      class="mt-1 mb-0"
+                      @click="updateDefaultWallet(item.name)"
+                    >
+                      <feather-icon icon="TrelloIcon" /> Detail
+                    </b-button>
                   </b-col>
                 </b-row>
               </b-card-body>
