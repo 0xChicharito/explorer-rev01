@@ -123,7 +123,7 @@ export default {
     },
   },
   mounted() {
-    this.timer = setInterval(this.trace, 1000)
+    this.timer = setInterval(this.trace, 3000)
   },
   beforeDestroy() {
     clearInterval(this.timer)

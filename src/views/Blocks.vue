@@ -152,7 +152,7 @@ export default {
           })
         }))
       })
-      this.timer = setInterval(this.fetch, 1000)
+      this.timer = setInterval(this.fetch, 3000)
     })
   },
   beforeDestroy() {
