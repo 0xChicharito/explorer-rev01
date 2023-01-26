@@ -138,10 +138,11 @@ export default {
     if (conf.excludes && conf.excludes.indexOf('mint') > -1) {
       this.mint = null
     } else {
-      this.$http.getMintingInflation().then(res => {
-        const chainIndex = this.chain.items.findIndex(x => x.subtitle === 'inflation')
-        this.$set(this.chain.items[chainIndex], 'title', `${percent(res)}%`)
-      })
+      // TODO: the route to this page is not available so we comment this out if we decide to support it in future
+      // this.$http.getMintingInflation().then(res => {
+      //   const chainIndex = this.chain.items.findIndex(x => x.subtitle === 'inflation')
+      //   this.$set(this.chain.items[chainIndex], 'title', `${percent(res)}%`)
+      // })
       this.$http.getMintParameters().then(res => {
         this.mint = this.normalize(res, 'Minting Parameters')
       })

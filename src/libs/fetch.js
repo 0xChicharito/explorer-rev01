@@ -6,9 +6,8 @@ import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import { toBase64 } from '@cosmjs/encoding'
 import {
   Proposal, ProposalTally, Proposer, StakingPool, Votes, Deposit,
-  Validator, StakingParameters, Block, ValidatorDistribution, StakingDelegation, WrapStdTx, getUserCurrency,
+  Validator, StakingParameters, Block, ValidatorDistribution, StakingDelegation, WrapStdTx, getUserCurrency, AnnualInflation,
 } from './utils'
-import OsmosAPI from './osmos'
 
 function commonProcess(res) {
   if (res && Object.keys(res).includes('result')) {
@@ -25,7 +24,6 @@ export function keybase(identity) {
 
 export default class ChainFetch {
   constructor() {
-    this.osmosis = new OsmosAPI()
     this.EndpointVersion = {
       certik: 'v1alpha1',
     }
@@ -143,18 +141,14 @@ export default class ChainFetch {
   }
 
   async getStakingPool() {
-    return this.get('/cosmos/staking/v1beta1/pool').then(data => new StakingPool().init(commonProcess(data.pool)))
+    return this.get('/cosmos/staking/v1beta1/pool')
+      .then(data => new StakingPool().init(commonProcess(data.pool)))
   }
 
-  async getMintingInflation() {
-    if (this.config.chain_name === 'evmos') {
-      return this.get('/evmos/inflation/v1/inflation_rate').then(data => Number(data.inflation_rate / 100 || 0))
-    }
-    if (this.config.chain_name === 'echelon') {
-      return this.get('/echelon/inflation/v1/inflation_rate').then(data => Number(data.inflation_rate / 100 || 0))
-    }
+  async getAnnualInflation() {
     if (this.isModuleLoaded('minting')) {
-      return this.get('/cosmos/mint/v1beta1/inflation').then(data => Number(commonProcess(data.inflation)))
+      return this.get('/nolus/mint/v1beta1/annual_inflation')
+        .then(data => new AnnualInflation().init(commonProcess(data)))
     }
     return 0
   }

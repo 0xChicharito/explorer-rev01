@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <b-card
-      v-if="calculateTotalChange !== 0"
+      v-if="calculateTotalChange!==0"
       border-variant="primary"
     >
       <b-row class="mx-0 d-flex align-items-center">

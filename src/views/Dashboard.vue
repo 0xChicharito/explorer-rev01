@@ -58,8 +58,8 @@
         <dashboard-card-vertical
           color="primary"
           icon="TrendingUpIcon"
-          :statistic="inflation"
-          statistic-title="Inflation"
+          :statistic="apr"
+          statistic-title="APR"
         />
       </b-col>
       <b-col
@@ -397,7 +397,7 @@ export default {
       validators: '-',
       communityPool: '-',
       ratio: '-',
-      inflation: '-',
+      apr: '-',
       proposals: [],
       myVotes: {},
       selectedValidator: '',
@@ -466,28 +466,18 @@ export default {
     })
 
     this.$http.getStakingParameters().then(res => {
-      Promise.all([this.$http.getStakingPool(), this.$http.getBankTotal(res.bond_denom)])
+      Promise.all([this.$http.getStakingPool(), this.$http.getBankTotal(res.bond_denom), this.$http.getAnnualInflation()])
         .then(pool => {
           this.supply = `${formatNumber(formatTokenAmount(pool[1].amount, 2, res.bond_denom, false), true, 2)}`
           this.bonded = `${formatNumber(formatTokenAmount(pool[0].bondedToken, 2, res.bond_denom, false), true, 2)}`
           this.ratio = `${percent(pool[0].bondedToken / pool[1].amount)}%`
+          this.apr = `${percent(pool[2].apr(pool[0].bondedToken))}%`
         })
     })
 
     this.$http.getCommunityPool().then(res => {
       this.communityPool = this.formatToken(res.pool)
     })
-
-    const conf = this.$http.getSelectedConfig()
-    if (conf.excludes && conf.excludes.indexOf('mint') > -1) {
-      this.inflation = '-'
-    } else {
-      this.$http.getMintingInflation().then(res => {
-        this.inflation = `${percent(res)}%`
-      }).catch(() => {
-        this.inflation = '-'
-      })
-    }
   },
   methods: {
     selectProposal(modal, pid, title) {

@@ -341,7 +341,8 @@ export default {
   created() {
     this.$http.getStakingPool().then(res => { this.stakingPool = res })
     this.$http.getStakingParameters().then(res => { this.stakingParameter = res })
-    this.$http.getMintingInflation().then(res => { this.mintInflation = res })
+    // TODO: refactor if we want real annual profit calculation with applies validator commission
+    // this.$http.getMintingInflation().then(res => { this.mintInflation = res })
     this.address = this.$route.params.address
     this.initial()
   },
