@@ -355,13 +355,12 @@ export default {
     initParamsForKeplr(chainid, chain) {
       return JSON.stringify({
         chainId: chainid,
-        chainName: chain.chain_name,
+        chainName: chain.display_name,
         rpc: Array.isArray(chain.rpc) ? chain.rpc[0] : chain.rpc,
         rest: Array.isArray(chain.api) ? chain.api[0] : chain.api,
         bip44: {
           coinType: chain.coin_type,
         },
-        coinType: chain.coin_type,
         bech32Config: {
           bech32PrefixAccAddr: chain.addr_prefix,
           bech32PrefixAccPub: `${chain.addr_prefix}pub`,
@@ -479,6 +478,7 @@ export default {
             if (window.keplr) {
               await window.keplr.experimentalSuggestChain(JSON.parse(this.keplr))
                 .catch(e => {
+                  console.log(e)
                   this.error = e
                 })
             }
