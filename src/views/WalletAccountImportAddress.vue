@@ -478,7 +478,6 @@ export default {
             if (window.keplr) {
               await window.keplr.experimentalSuggestChain(JSON.parse(this.keplr))
                 .catch(e => {
-                  console.log(e)
                   this.error = e
                 })
             }
