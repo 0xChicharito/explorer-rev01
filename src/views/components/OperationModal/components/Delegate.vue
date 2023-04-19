@@ -184,7 +184,7 @@ export default {
       return options
     },
     balanceOptions() {
-      return this.setupBalance()
+      return [this.setupBalance()[0]]
     },
     msg() {
       return [{
