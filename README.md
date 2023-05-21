@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>Ping Dashboard</h1>
+<h1>Nolus explorer by Ping Dashboard</h1>
 
 <br /><p align="center"><img alt="Ping Dashboard logo" src="docs/explorer-logo.svg" width="100"/></p><br />
 
