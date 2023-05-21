@@ -22,22 +22,21 @@ function processMenu() {
   if (isTestnet()) {
     chainMenus.push({
       title: 'Testnet Explorer',
-      href: 'https://testnet.nolus.io',
+      href: 'https://explorer-rila.nolus.io/',
       icon: 'CompassIcon',
     })
   } else {
     chainMenus.push({
       title: 'Mainnet Explorer',
-      href: 'http://mainnet.nolus.io',
+      href: 'https://explorer.nolus.io/',
       icon: 'CompassIcon',
     })
   }
-  // TODO uncomment once we are open source
-  // chainMenus.push({
-  //   title: 'Github',
-  //   href: '',
-  //   icon: 'GithubIcon',
-  // })
+  chainMenus.push({
+    title: 'Github',
+    href: 'https://github.com/nolus-protocol',
+    icon: 'GithubIcon',
+  })
   chainMenus.push({
     title: 'Discord',
     href: 'https://discord.com/invite/nolus-protocol',
