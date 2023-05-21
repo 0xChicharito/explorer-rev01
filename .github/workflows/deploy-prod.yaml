@@ -1,13 +1,15 @@
-name: Deploy dev
+name: Deploy prod
 
+# A version is denoted with a protected tag.
 on:
   push:
-    branches:
-      - master
+    # Only tags which match the protected tag pattern will trigger this workflow
+    tags:
+      - v*.*.*
 
 env:
-  BUCKET_NAME: explorer-rila.nolus.io
-  CLOUDFRONT_ID: E1DJGBQF83XZJ2
+  BUCKET_NAME: explorer.nolus.io
+  CLOUDFRONT_ID: EBF6FD17WAO9R
   AWS_REGION: eu-west-1
 
 jobs:
@@ -34,7 +36,7 @@ jobs:
     name: Deploy to AWS
     runs-on: ubuntu-latest
     container: amazon/aws-cli
-    environment: development
+    environment: production
     needs: build
 
     steps:
@@ -59,7 +61,7 @@ jobs:
     name: Invalidate cache
     runs-on: ubuntu-latest
     container: amazon/aws-cli
-    environment: development
+    environment: production
     needs: deploy
 
     steps:
