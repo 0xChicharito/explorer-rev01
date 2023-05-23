@@ -21,14 +21,14 @@ function processMenu() {
   })
   if (isTestnet()) {
     chainMenus.push({
-      title: 'Testnet Explorer',
-      href: 'https://explorer-rila.nolus.io/',
+      title: 'Mainnet Explorer',
+      href: 'https://explorer.nolus.io/',
       icon: 'CompassIcon',
     })
   } else {
     chainMenus.push({
-      title: 'Mainnet Explorer',
-      href: 'https://explorer.nolus.io/',
+      title: 'Testnet Explorer',
+      href: 'https://explorer-rila.nolus.io/',
       icon: 'CompassIcon',
     })
   }
