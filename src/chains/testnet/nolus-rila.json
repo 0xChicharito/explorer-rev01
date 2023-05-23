@@ -9,7 +9,7 @@
     "https://net-rila.nolus.io:26657"
   ],
   "snapshot_provider": "",
-  "sdk_version": "v0.45.13",
+  "sdk_version": "v0.45.15",
   "coin_type": 118,
   "min_tx_fee": "8000",
   "addr_prefix": "nolus",

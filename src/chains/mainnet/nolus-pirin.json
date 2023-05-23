@@ -1,15 +1,15 @@
 {
-  "chain_name": "nolus-rila",
-  "display_name": "Nolus Testnet",
+  "chain_name": "pirin-1",
+  "display_name": "Nolus Mainnet",
   "coingecko": "",
   "api": [
-    "https://net-rila.nolus.io:1317"
+    "https://pirin-cl.nolus.network:1317"
   ],
   "rpc": [
-    "https://net-rila.nolus.io:26657"
+    "https://pirin-cl.nolus.network:26657"
   ],
   "snapshot_provider": "",
-  "sdk_version": "v0.45.13",
+  "sdk_version": "v0.45.15",
   "coin_type": 118,
   "min_tx_fee": "8000",
   "addr_prefix": "nolus",
