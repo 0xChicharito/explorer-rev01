@@ -1,6 +1,6 @@
 {
-  "chain_name": "pirin-1 (mainnet)",
-  "display_name": "Nolus Mainnet",
+  "chain_name": "pirin-1",
+  "display_name": "Nolus",
   "coingecko": "",
   "api": [
     "https://pirin-cl.nolus.network:1317"
