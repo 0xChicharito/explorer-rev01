@@ -3,10 +3,10 @@
   "display_name": "Nolus Testnet",
   "coingecko": "",
   "api": [
-    "https://net-rila.nolus.io:1317"
+    "https://rila-cl.nolus.network:1317"
   ],
   "rpc": [
-    "https://net-rila.nolus.io:26657"
+    "https://rila-cl.nolus.network:26657"
   ],
   "snapshot_provider": "",
   "sdk_version": "v0.45.15",
