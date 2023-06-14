@@ -200,7 +200,6 @@ export default {
       return v.substring(0, 10).concat('...', v.substring(v.length - 10))
     },
     updateDefaultWallet(v, i) {
-      console.log(i)
       this.$store.commit('setDefaultWallet', v)
     },
     change(v) {
