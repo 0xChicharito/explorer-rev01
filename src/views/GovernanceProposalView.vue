@@ -1,57 +1,29 @@
 <template>
   <section>
-    <b-card
-      no-body
-    >
+    <b-card no-body>
       <b-card-header>
         <b-card-title>
           #{{ proposal.id }}
-          <b-badge
-            v-if="proposal.status == 1"
-            pill
-            variant="light-info"
-            class="text-right"
-          >
+          <b-badge v-if="proposal.status == 1" pill variant="light-info" class="text-right">
             Deposit
           </b-badge>
-          <b-badge
-            v-if="proposal.status == 2"
-            pill
-            variant="light-primary"
-            class="text-right"
-          >
+          <b-badge v-if="proposal.status == 2" pill variant="light-primary" class="text-right">
             Voting
           </b-badge>
-          <b-badge
-            v-if="proposal.status == 3"
-            pill
-            variant="light-success"
-            class="text-right"
-          >
+          <b-badge v-if="proposal.status == 3" pill variant="light-success" class="text-right">
             Passed
           </b-badge>
-          <b-badge
-            v-if="proposal.status == 4"
-            pill
-            variant="light-danger"
-            class="text-right"
-          >
+          <b-badge v-if="proposal.status == 4" pill variant="light-danger" class="text-right">
             Rejected
           </b-badge>
           {{ proposal.title }}
         </b-card-title>
       </b-card-header>
       <b-card-body>
-        <b-table-simple
-          stacked="sm"
-          hover
-          striped
-        >
+        <b-table-simple stacked="sm" hover striped>
           <tbody>
             <b-tr>
-              <b-td
-                style="text-transform: capitalize; vertical-align: top; width:200px"
-              >
+              <b-td class="text-justify" style="text-transform: capitalize; vertical-align: top; width:200px">
                 {{ $t('proposal_id') }}
               </b-td><b-td>{{ proposal.id }}</b-td>
             </b-tr>
@@ -59,8 +31,8 @@
               <b-td>
                 {{ $t('proposal_proposer') }}
               </b-td><b-td><router-link :to="`../account/${proposer.proposer}`">
-                {{ formatAddress(proposer.proposer) }}
-              </router-link> </b-td>
+                  {{ formatAddress(proposer.proposer) }}
+                </router-link> </b-td>
             </b-tr>
             <b-tr>
               <b-td>
@@ -75,15 +47,12 @@
             <b-tr>
               <b-td>
                 {{ $t('voting_time') }}
-              </b-td><b-td>{{ formatDate(proposal.voting_start_time) }} - {{ formatDate(proposal.voting_end_time) }}</b-td>
+              </b-td><b-td>{{ formatDate(proposal.voting_start_time) }} - {{ formatDate(proposal.voting_end_time)
+              }}</b-td>
             </b-tr>
           </tbody>
         </b-table-simple>
-        <div>
-          <object-field-component
-            :tablefield="proposal.contents"
-            :small="false"
-          /></div>
+        <object-field-component :tablefield="proposal.contents" :small="false" />
         <b-table-simple v-if="proposal.type.indexOf('SoftwareUpgrade') > 0">
           <b-tr>
             <b-td class="text-center">
@@ -95,19 +64,12 @@
       </b-card-body>
       <b-card-footer>
         <router-link :to="from">
-          <b-button
-            variant="outline-primary"
-          >
+          <b-button variant="outline-primary">
             {{ $t('btn_back_list') }}
           </b-button>
         </router-link>
-        <b-button
-          v-b-modal.operation-modal
-          :disabled="proposal.status!=2"
-          variant="primary"
-          class="btn float-right mg-2"
-          @click="openModal('Vote')"
-        >
+        <b-button v-b-modal.operation-modal :disabled="proposal.status != 2" variant="primary" class="btn float-right mg-2"
+          @click="openModal('Vote')">
           {{ $t('btn_vote') }}
         </b-button>
       </b-card-footer>
@@ -119,101 +81,51 @@
         </b-card-title>
       </b-card-header>
       <b-card-body>
-        <b-progress
-          :max="100"
-          height="2rem"
-          class="mb-2"
-          show-progress
-        >
-          <b-progress-bar
-            :id="'vote-yes'+proposal.id"
-            variant="success"
-            :value="percent(proposal.tally.yes)"
-            :label="`${percent(proposal.tally.yes).toFixed()}%`"
-            show-progress
-          />
-          <b-progress-bar
-            :id="'vote-no'+proposal.id"
-            variant="warning"
-            :value="percent(proposal.tally.no)"
-            :label="`${percent(proposal.tally.no).toFixed()}%`"
-            show-progress
-          />
-          <b-progress-bar
-            :id="'vote-veto'+proposal.id"
-            variant="danger"
-            :value="percent(proposal.tally.veto)"
-            :label="`${percent(proposal.tally.veto).toFixed()}%`"
-            show-progress
-          />
-          <b-progress-bar
-            :id="'vote-abstain'+proposal.id"
-            variant="info"
-            :value="percent(proposal.tally.abstain)"
-            :label="`${percent(proposal.tally.abstain).toFixed()}%`"
-            show-progress
-          />
+        <b-progress :max="100" height="2rem" class="mb-2" show-progress>
+          <b-progress-bar :id="'vote-yes' + proposal.id" variant="success" :value="percent(proposal.tally.yes)"
+            :label="`${percent(proposal.tally.yes).toFixed()}%`" show-progress />
+          <b-progress-bar :id="'vote-no' + proposal.id" variant="warning" :value="percent(proposal.tally.no)"
+            :label="`${percent(proposal.tally.no).toFixed()}%`" show-progress />
+          <b-progress-bar :id="'vote-veto' + proposal.id" variant="danger" :value="percent(proposal.tally.veto)"
+            :label="`${percent(proposal.tally.veto).toFixed()}%`" show-progress />
+          <b-progress-bar :id="'vote-abstain' + proposal.id" variant="info" :value="percent(proposal.tally.abstain)"
+            :label="`${percent(proposal.tally.abstain).toFixed()}%`" show-progress />
         </b-progress>
-        <b-tooltip
-          :target="'vote-yes'+proposal.id"
-        >
+        <b-tooltip :target="'vote-yes' + proposal.id">
           {{ percent(proposal.tally.yes) }}% voted Yes
         </b-tooltip>
-        <b-tooltip
-          :target="'vote-no'+proposal.id"
-        >
+        <b-tooltip :target="'vote-no' + proposal.id">
           {{ percent(proposal.tally.no) }}% voted No
         </b-tooltip>
-        <b-tooltip
-          :target="'vote-veto'+proposal.id"
-        >
+        <b-tooltip :target="'vote-veto' + proposal.id">
           {{ percent(proposal.tally.veto) }}% voted No With Veto
         </b-tooltip>
-        <b-tooltip
-          :target="'vote-abstain'+proposal.id"
-        >
+        <b-tooltip :target="'vote-abstain' + proposal.id">
           {{ percent(proposal.tally.abstain) }}% voted Abstain
         </b-tooltip>
-        <b-table
-          v-if="votes.votes && votes.votes.length > 0"
-          stacked="sm"
-          :fields="votes_fields"
-          :items="votes.votes"
-          striped
-        >
+        <b-table v-if="votes.votes && votes.votes.length > 0" stacked="sm" :fields="votes_fields" :items="votes.votes"
+          striped>
           <template #cell(voter)="data">
             <router-link :to="`../account/${data.item.voter}`">
               {{ formatAddress(data.item.voter) }}
             </router-link>
           </template>
         </b-table>
-        <div
-          v-if="next"
-          class="addzone text-center pt-50 pb-50 bg-transparent text-primary"
-          @click="loadVotes()"
-        >
+        <div v-if="next" class="addzone text-center pt-50 pb-50 bg-transparent text-primary" @click="loadVotes()">
           <feather-icon icon="PlusIcon" />
           Load More Votes
         </div>
       </b-card-body>
     </b-card>
-    <b-card
-      v-if="proposal.total_deposit"
-      no-body
-    >
+    <b-card v-if="proposal.total_deposit" no-body>
       <b-card-header>
         <b-card-title>
           Deposits ({{ formatToken(proposal.total_deposit) }})
         </b-card-title>
       </b-card-header>
       <b-card-body>
-        <b-table
-          v-if="Array.isArray(deposits.deposits || deposits)"
-          stacked="sm"
-          :items="deposits.deposits || deposits"
-          :fields="deposit_fields"
-          striped
-        >
+        <b-table v-if="Array.isArray(deposits.deposits || deposits)" stacked="sm" :items="deposits.deposits || deposits"
+          :fields="deposit_fields" striped>
           <template #cell(depositor)="data">
             <router-link :to="`../account/${data.item.depositor}`">
               {{ formatAddress(data.item.depositor) }}
@@ -223,37 +135,21 @@
       </b-card-body>
       <b-card-footer>
         <router-link :to="from">
-          <b-button
-            variant="outline-primary"
-          >
+          <b-button variant="outline-primary">
             {{ $t('btn_back_list') }}
           </b-button>
         </router-link>
-        <b-button
-          v-b-modal.operation-modal
-          :disabled="proposal.status!=1"
-          variant="primary"
-          class="btn float-right mg-2"
-          @click="openModal('GovDeposit')"
-        >
+        <b-button v-b-modal.operation-modal :disabled="proposal.status != 1" variant="primary" class="btn float-right mg-2"
+          @click="openModal('GovDeposit')">
           {{ $t('btn_deposit') }}
         </b-button>
-        <b-button
-          v-b-modal.operation-modal
-          :disabled="proposal.status!=2"
-          variant="primary"
-          class="btn float-right mg-2 mr-1"
-          @click="openModal('Vote')"
-        >
+        <b-button v-b-modal.operation-modal :disabled="proposal.status != 2" variant="primary"
+          class="btn float-right mg-2 mr-1" @click="openModal('Vote')">
           {{ $t('btn_vote') }}
         </b-button>
       </b-card-footer>
     </b-card>
-    <operation-modal
-      :type="operationModalType"
-      :proposal-id="Number(proposal.id)"
-      :proposal-title="proposal.title"
-    />
+    <operation-modal :type="operationModalType" :proposal-id="Number(proposal.id)" :proposal-title="proposal.title" />
   </section>
 </template>
 
@@ -388,7 +284,7 @@ export default {
     })
     this.$http.getGovernanceDeposits(pid).then(res => {
       this.deposits = res
-    }).catch(() => {})
+    }).catch(() => { })
     this.$http.getGovernanceVotes(pid).then(res => {
       this.votes = res
       this.next = res.pagination ? res.pagination.next_key : null
@@ -421,16 +317,20 @@ export default {
 
 <style lang="css">
 .addzone {
-    border: 2px dashed #ced4da;
-    background: #fff;
-    border-radius: 6px;
-    cursor: pointer;
-    box-shadow: none;
+  border: 2px dashed #ced4da;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: none;
 }
+
 .addzone :hover {
-    border: 2px dashed #082D63;
+  border: 2px dashed #082D63;
 }
+
 @media (min-width: 768px) {
-  td:first-child { width: 20% ;}
+  td:first-child {
+    width: 20%;
+  }
 }
 </style>

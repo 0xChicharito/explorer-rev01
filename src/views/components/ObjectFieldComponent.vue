@@ -66,7 +66,7 @@
           <VueMarkdown v-if="name==='description'">
             {{ addNewLine(value) }}
           </VueMarkdown>
-          <span v-else>{{ value }}</span>
+          <span v-else class="d-inline-block text-truncate" style="width: 68rem;">{{ value }}</span>
         </b-td>
       </b-tr>
     </b-tbody>

@@ -4,74 +4,32 @@
     <!-- Nav Menu Toggler -->
     <ul class="nav navbar-nav d-lg-none">
       <li class="nav-item">
-        <b-link
-          class="nav-link"
-          @click="toggleVerticalMenuActive"
-        >
-          <b-avatar
-            v-if="selected_chain && selected_chain.logo"
-            variant="transparent"
-            rounded
-            size="21"
-            :src="selected_chain.hamburger"
-            class="badge-minimal"
-          />
-          <feather-icon
-            v-else
-            icon="MenuIcon"
-            size="21"
-          />
+        <b-link class="nav-link" @click="toggleVerticalMenuActive">
+          <b-avatar v-if="selected_chain && selected_chain.logo" variant="transparent" rounded size="21"
+            :src="selected_chain.hamburger" class="badge-minimal" />
+          <feather-icon v-else icon="MenuIcon" size="21" />
         </b-link>
       </li>
     </ul>
 
     <!-- Left Col -->
     <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
-      <b-media
-        v-if="selected_chain"
-        no-body
-      >
+      <b-media v-if="selected_chain" no-body>
         <b-media-aside class="mr-75">
-          <b-link
-            class="nav-link"
-            @click="toggleVerticalMenuActive"
-          >
-            <b-avatar
-              v-b-tooltip.hover.bottom="tips"
-              variant="transparent"
-              badge
-              rounded
-              size="42"
-              :src="selected_chain.logo"
-              class="badge-minimal"
-              :badge-variant="variant"
-            /></b-link>
+          <b-link class="nav-link" @click="toggleVerticalMenuActive">
+            <b-avatar v-b-tooltip.hover.bottom="tips" variant="transparent" badge rounded size="42"
+              :src="selected_chain.logo" class="badge-minimal" :badge-variant="variant" /></b-link>
         </b-media-aside>
         <b-media-body class="my-auto">
           <h6 class="mb-0 ">
             <span class="text-uppercase">{{ chainid || selected_chain.chain_name }}</span>
           </h6>
           <small id="data-provider">
-            <b-dropdown
-              class="ml-0"
-              variant="flat-primary"
-              no-caret
-              toggle-class="p-0"
-              left
-              sm
-            >
+            <b-dropdown class="ml-0" variant="flat-primary" no-caret toggle-class="p-0" left sm>
               <template #button-content>
-                <feather-icon
-                  icon="RepeatIcon"
-                  size="12"
-                  class="cursor-pointer"
-                />
+                <feather-icon icon="RepeatIcon" size="12" class="cursor-pointer" />
               </template>
-              <b-dropdown-item
-                v-for="(item, i) in apiOptions"
-                :key="item"
-                @click="change(i)"
-              >
+              <b-dropdown-item v-for="(item, i) in apiOptions" :key="item" @click="change(i)">
                 {{ item }}
               </b-dropdown-item>
             </b-dropdown>
@@ -84,108 +42,66 @@
     <!-- Right Col -->
     <b-navbar-nav class="nav align-items-center ml-auto">
       <search-bar />
-      <b-dropdown
-        class="ml-1"
-        variant="link"
-        no-caret
-        toggle-class="p-0"
-        right
-      >
+      <b-dropdown class="ml-1" variant="link" no-caret toggle-class="p-0" right>
 
         <template #button-content>
-          <b-button
-            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="primary"
-            class="btn-icon"
-          >
+          <b-button v-ripple.400="'rgba(255, 255, 255, 0.15)'" variant="primary" class="btn-icon">
             <feather-icon icon="KeyIcon" />
             {{ walletName }}
           </b-button>
         </template>
 
-        <b-dropdown-item
-          v-for="(item,k) in accounts"
-          :key="k"
-          :disabled="!item.address"
-          @click="updateDefaultWallet(item.wallet)"
-        >
-          <div class="d-flex flex-column">
-            <div class="d-flex justify-content-between">
-              <span class="font-weight-bolder">{{ item.wallet }}
-                <b-avatar
-                  v-if="item.wallet===walletName"
-                  variant="success"
-                  size="sm"
-                >
-                  <feather-icon icon="CheckIcon" />
-                </b-avatar>
-              </span>
+        <b-dropdown-item v-for="(item, k) in accounts" :key="k" :disabled="!item.address"
+          @click="updateDefaultWallet(item.wallet, item)">
+          <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="">
+              <feather-icon v-if="item.wallet === walletName" icon="CheckIcon" />
+              <feather-icon v-else class="invisible" icon="CheckIcon" />
+            </div>
+            <div class="pl-1 pr-1 fixed">
+              <div class="d-flex justify-content-between">
+                <span class="font-weight-bolder">{{ item.wallet }}</span>
+              </div>
+              <small>{{ formatAddr(item.address.addr) }}</small>
+            </div>
+            <div class="">
               <b-link :to="`/${selected_chain.chain_name}/account/${item.address.addr}`">
-                <feather-icon icon="ArrowRightIcon" />
+                <button type="button" class="btn btn-outline-primary btn-sm">
+                  <feather-icon icon="ArrowRightIcon" />
+                </button>
               </b-link>
             </div>
-            <small>{{ item.address ? formatAddr(item.address.addr) : `Not available on ${selected_chain.chain_name}` }}</small>
           </div>
         </b-dropdown-item>
         <b-dropdown-divider />
         <b-dropdown-item to="/wallet/import">
-          <feather-icon
-            icon="PlusIcon"
-            size="16"
-          />
+          <feather-icon icon="PlusIcon" size="16" />
           <span class="align-middle ml-50">Import Address</span>
         </b-dropdown-item>
         <b-dropdown-divider />
 
         <b-dropdown-item :to="{ name: 'accounts' }">
-          <feather-icon
-            icon="KeyIcon"
-            size="16"
-          />
+          <feather-icon icon="KeyIcon" size="16" />
           <span class="align-middle ml-50">All Accounts</span>
         </b-dropdown-item>
 
-        <b-dropdown-item
-          :to="{ name: 'delegations' }"
-          class="hidden"
-        >
-          <feather-icon
-            icon="BookOpenIcon"
-            size="16"
-          />
+        <b-dropdown-item :to="{ name: 'delegations' }" class="hidden">
+          <feather-icon icon="BookOpenIcon" size="16" />
           <span class="align-middle ml-50">My Delegations</span>
         </b-dropdown-item>
 
-        <b-dropdown-item
-          :to="`/${selected_chain.chain_name}/uptime/my`"
-          class="hidden"
-        >
-          <feather-icon
-            icon="AirplayIcon"
-            size="16"
-          />
+        <b-dropdown-item :to="`/${selected_chain.chain_name}/uptime/my`" class="hidden">
+          <feather-icon icon="AirplayIcon" size="16" />
           <span class="align-middle ml-50">My Validators</span>
         </b-dropdown-item>
 
-        <b-dropdown-item
-          :to="`/wallet/votes`"
-          class="hidden"
-        >
-          <feather-icon
-            icon="PocketIcon"
-            size="16"
-          />
+        <b-dropdown-item :to="`/wallet/votes`" class="hidden">
+          <feather-icon icon="PocketIcon" size="16" />
           <span class="align-middle ml-50">My Votes</span>
         </b-dropdown-item>
 
-        <b-dropdown-item
-          :to="`/wallet/transactions`"
-          class="hidden"
-        >
-          <feather-icon
-            icon="LayersIcon"
-            size="16"
-          />
+        <b-dropdown-item :to="`/wallet/transactions`" class="hidden">
+          <feather-icon icon="LayersIcon" size="16" />
           <span class="align-middle ml-50">My Transactions</span>
         </b-dropdown-item>
       </b-dropdown>
@@ -229,7 +145,7 @@ export default {
   props: {
     toggleVerticalMenuActive: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
   },
   data() {
@@ -283,7 +199,8 @@ export default {
     formatAddr(v) {
       return v.substring(0, 10).concat('...', v.substring(v.length - 10))
     },
-    updateDefaultWallet(v) {
+    updateDefaultWallet(v, i) {
+      console.log(i)
       this.$store.commit('setDefaultWallet', v)
     },
     change(v) {
@@ -312,3 +229,8 @@ export default {
   },
 }
 </script>
+<style>
+.fixed {
+  width: 200px;
+}
+</style>
