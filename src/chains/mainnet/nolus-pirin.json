@@ -1,7 +1,7 @@
 {
   "chain_name": "pirin-1",
   "display_name": "Nolus",
-  "coingecko": "",
+  "coingecko": "nolus",
   "api": [
     "https://pirin-cl.nolus.network:1317"
   ],
@@ -20,7 +20,7 @@
       "base": "unls",
       "symbol": "NLS",
       "exponent": 6,
-      "coingecko_id": "",
+      "coingecko_id": "nolus",
       "logo": "/logos/nolus-small.svg"
     }
   ]
